@@ -20,6 +20,10 @@
 #define PROXIMITY_NEAR 2
 #define PROXIMITY_FAR 3
 
+int _differentProximityCount = 0;
+int _currentProximityValue = 0;
+NSString *_currentProximityText = @"";
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -41,6 +45,23 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedStatusNotification:) name:ROX_NOTIF_BEACON_RANGE_UPDATE object:nil];
 }
 
+- (BOOL)isNewProximity:(int) incomingProximityValue
+{
+    if (incomingProximityValue == 0)
+    {
+        return NO;
+    }
+    else if (_currentProximityValue == 0 || (_currentProximityValue != incomingProximityValue && _differentProximityCount > 2))
+    {
+        _currentProximityValue = incomingProximityValue;
+        _differentProximityCount = 0;
+        return YES;
+    }
+    
+    _differentProximityCount++;
+    return NO;
+}
+
 //This function is the application’s response to the observation of the “ROX_NOTIF_BEACON_RANGE_UPDATE” string from the Notification Center. Here it is passed a notification containing the userInfo dictionary.
 -(void) receivedStatusNotification:(NSNotification *) notification
 {
@@ -57,26 +78,29 @@
         
         UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
         
-        if ([beaconName isEqualToString:@"Front Door"])
+        if ([beaconName isEqualToString:@"Front Door"] && [self isNewProximity:[proximityValue intValue]])
         {
             switch ([proximityValue intValue])
             {
                 case PROXIMITY_FAR:
-                    cell.textLabel.text = @"Warm";
+                    _currentProximityText = @"Warm";
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
                     break;
                 case PROXIMITY_NEAR:
-                    cell.textLabel.text = @"Getting Warmer";
+                    _currentProximityText = @"Getting Warmer";
+                            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
                     break;
                 case PROXIMITY_IMMEDIATE:
-                    cell.textLabel.text = @"Hot!";
+                    _currentProximityText = @"Hot!";
+                            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
                     break;
                 default:
-                    cell.textLabel.text = @"Frosty";
+//                    cell.textLabel.text = @"Frosty";
                     break;
             }
         }
         
-        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+
     }
 }
 
@@ -103,7 +127,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PatrolCell" forIndexPath:indexPath];
     
     // Configure the cell...
-
+    cell.textLabel.text = _currentProximityText;
     
     return cell;
 }
