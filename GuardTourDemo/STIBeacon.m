@@ -14,6 +14,7 @@
 @implementation STIBeacon
 
 @dynamic beaconId;
+@dynamic name;
 @dynamic checked;
 @dynamic checkedCount;
 @dynamic currentProximityValue;
