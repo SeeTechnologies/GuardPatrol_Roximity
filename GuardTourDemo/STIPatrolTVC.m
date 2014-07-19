@@ -47,23 +47,6 @@ NSString *_currentProximityText = @"";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedStatusNotification:) name:ROX_NOTIF_BEACON_RANGE_UPDATE object:nil];
 }
 
-- (BOOL)isNewProximity:(int) incomingProximityValue
-{
-    if (incomingProximityValue == 0)
-    {
-        return NO;
-    }
-    else if (_currentProximityValue == 0 || (_currentProximityValue != incomingProximityValue && _differentProximityCount > 2))
-    {
-        _currentProximityValue = incomingProximityValue;
-        _differentProximityCount = 0;
-        return YES;
-    }
-    
-    _differentProximityCount++;
-    return NO;
-}
-
 //This function is the application’s response to the observation of the “ROX_NOTIF_BEACON_RANGE_UPDATE” string from the Notification Center. Here it is passed a notification containing the userInfo dictionary.
 -(void) receivedStatusNotification:(NSNotification *) notification
 {
@@ -73,43 +56,22 @@ NSString *_currentProximityText = @"";
     for (STIBeacon *beacon in propertyBeacons)
     {
         NSDictionary *beaconDictionary = [rangedBeaconsDictionary objectForKey:beacon.beaconId];
-        beacon.currentProximityValue = [beaconDictionary objectForKey:kROXNotifBeaconProximityValue];
-        beacon.name = [beaconDictionary objectForKey:kROXNotifBeaconName];
-
-        NSLog(@"Beacon: %@ is at %@ proximity", beacon.name, beacon.currentProximityValue);
+        
+        if (beaconDictionary != nil)
+        {
+            if ([beacon isNewProximity:[[beaconDictionary objectForKey:kROXNotifBeaconProximityValue] intValue]])
+            {
+                beacon.currentProximityValue = [beaconDictionary objectForKey:kROXNotifBeaconProximityValue];
+            }
+            
+            if (![beacon.name isEqualToString:[beaconDictionary objectForKey:kROXNotifBeaconName]])
+            {
+                beacon.name = [beaconDictionary objectForKey:kROXNotifBeaconName];
+            }
+            
+            NSLog(@"Beacon: %@ is at %@ proximity", beacon.name, beacon.currentProximityValue);
+        }
     }
-    
-//    for (NSString * key in rangedBeaconsDictionary.allKeys)
-//    {
-//        NSDictionary *beaconDictionary = [rangedBeaconsDictionary objectForKey:key];
-//        NSString *beaconName = [beaconDictionary objectForKey:kROXNotifBeaconName];
-//        NSString *proximity = [beaconDictionary objectForKey:kROXNotifBeaconProximityString];
-//
-//        
-//        NSString *proximityValue = [beaconDictionary objectForKey:kROXNotifBeaconProximityValue];
-//        
-//        if ([beaconName isEqualToString:@"Front Door"] && [self isNewProximity:[proximityValue intValue]])
-//        {
-//            switch ([proximityValue intValue])
-//            {
-//                case PROXIMITY_FAR:
-//                    _currentProximityText = @"Warm";
-//        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
-//                    break;
-//                case PROXIMITY_NEAR:
-//                    _currentProximityText = @"Getting Warmer";
-//                            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
-//                    break;
-//                case PROXIMITY_IMMEDIATE:
-//                    _currentProximityText = @"Hot!";
-//                            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
-//                    break;
-//                default:
-////                    cell.textLabel.text = @"Frosty";
-//                    break;
-//            }
-//        }
-//    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -162,30 +124,27 @@ NSString *_currentProximityText = @"";
     
     STIBeacon *beacon = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = beacon.name;
-    cell.detailTextLabel.text = [beacon.currentProximityValue stringValue];
+//    cell.detailTextLabel.text = [beacon.currentProximityValue stringValue];
     // Configure the cell...
 //    cell.textLabel.text = _currentProximityText;
     
     //        if ([self isNewProximity:[proximityValue intValue]])
     //        {
-//    switch ([proximityValue intValue])
-//    {
-//        case PROXIMITY_FAR:
-//            _currentProximityText = @"Warm";
-//            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
-//            break;
-//        case PROXIMITY_NEAR:
-//            _currentProximityText = @"Getting Warmer";
-//            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
-//            break;
-//        case PROXIMITY_IMMEDIATE:
-//            _currentProximityText = @"Hot!";
-//            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
-//            break;
-//        default:
-//            //                    cell.textLabel.text = @"Frosty";
-//            break;
-//    }
+    switch ([beacon.currentProximityValue intValue])
+    {
+        case PROXIMITY_FAR:
+            cell.detailTextLabel.text = @"Out of range";
+            break;
+        case PROXIMITY_NEAR:
+            cell.detailTextLabel.text = beacon.nearMessage;
+            break;
+        case PROXIMITY_IMMEDIATE:
+            cell.detailTextLabel.text = beacon.immediateMessage;
+            break;
+        default:
+            //                    cell.textLabel.text = @"Frosty";
+            break;
+    }
     //        }
 
     

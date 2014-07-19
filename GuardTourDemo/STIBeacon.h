@@ -34,5 +34,6 @@
 - (void)removePatrolsForCheckedBeacon:(NSSet *)values;
 
 - (instancetype)initWithBeaconId: (NSString *) newBeaconId nearMessage: (NSString *) newNearMessage immediateMessage: (NSString *) newImmediateMessage errorMessage: (NSString *) newErrorMessage;
+- (BOOL)isNewProximity:(int) incomingProximityValue;
 
 @end

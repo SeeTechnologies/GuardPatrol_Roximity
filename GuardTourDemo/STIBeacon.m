@@ -43,4 +43,21 @@
     return self;
 }
 
+- (BOOL)isNewProximity:(int) incomingProximityValue
+{
+    if (incomingProximityValue == 0)
+    {
+        return NO;
+    }
+    else if ([self.currentProximityValue intValue] == 0 || ([self.currentProximityValue intValue] != incomingProximityValue && [self.differentProximityCount intValue] > 2))
+    {
+        self.currentProximityValue = [NSNumber numberWithInt: incomingProximityValue];
+        self.differentProximityCount = [NSNumber numberWithInt:0];
+        return YES;
+    }
+    
+    self.differentProximityCount = [NSNumber numberWithInt:([self.differentProximityCount intValue] + 1)];
+    return NO;
+}
+
 @end
