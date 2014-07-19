@@ -27,7 +27,7 @@
 	// Do any additional setup after loading the view, typically from a nib.
     
     //This directs the application to observe the “ROX_NOTIF_BEACON_RANGE_UPDATE” string and calls the “receivedStatusNotification” function.
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedStatusNotification:) name:ROX_NOTIF_BEACON_RANGE_UPDATE object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedStatusNotification:) name:ROX_NOTIF_BEACON_RANGE_UPDATE object:nil];
 }
 
 //This function is the application’s response to the observation of the “ROX_NOTIF_BEACON_RANGE_UPDATE” string from the Notification Center. Here it is passed a notification containing the userInfo dictionary.
