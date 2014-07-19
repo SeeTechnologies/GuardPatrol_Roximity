@@ -45,6 +45,7 @@ NSString *_currentProximityText = @"";
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedStatusNotification:) name:ROX_NOTIF_BEACON_RANGE_UPDATE object:nil];
+    self.title = @"Wilman Manor";
 }
 
 //This function is the application’s response to the observation of the “ROX_NOTIF_BEACON_RANGE_UPDATE” string from the Notification Center. Here it is passed a notification containing the userInfo dictionary.
@@ -140,6 +141,11 @@ NSString *_currentProximityText = @"";
             break;
         case PROXIMITY_IMMEDIATE:
             cell.detailTextLabel.text = beacon.immediateMessage;
+            
+            if (!beacon.checked)
+            {
+                beacon.checked = [NSNumber numberWithBool:YES];
+            }
             break;
         default:
             //                    cell.textLabel.text = @"Frosty";
@@ -147,6 +153,10 @@ NSString *_currentProximityText = @"";
     }
     //        }
 
+    if (beacon.checked)
+    {
+        cell.backgroundColor = [UIColor greenColor];
+    }
     
     return cell;
 }
