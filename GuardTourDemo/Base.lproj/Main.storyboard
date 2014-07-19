@@ -13,7 +13,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="94b-vv-6d6"/>
+                        <segue destination="6Sl-PH-5Xh" kind="relationship" relationship="rootViewController" id="LTQ-Ha-wZI"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dMi-23-g8d" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -45,9 +45,6 @@
                                 <state key="normal" title="Start">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="6Sl-PH-5Xh" kind="push" id="KWw-Rf-npp"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -59,7 +56,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-158" y="-669"/>
+            <point key="canvasLocation" x="-173" y="-317"/>
         </scene>
         <!--PatrolTVC-->
         <scene sceneID="8xp-Wa-pqb">

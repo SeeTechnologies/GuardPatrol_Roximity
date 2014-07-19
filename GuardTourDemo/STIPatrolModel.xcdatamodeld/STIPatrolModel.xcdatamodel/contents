@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13D65" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="STIBeacon" syncable="YES">
+        <attribute name="beaconId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="checked" optional="YES" transient="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="checkedCount" optional="YES" transient="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="currentProximityValue" optional="YES" transient="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="differentProximityCount" optional="YES" transient="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="errorMessage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="immediateMessage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nearMessage" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="patrolsForCheckedBeacon" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="STIPatrol" inverseName="beaconsCheckedForPatrol" inverseEntity="STIPatrol" syncable="YES"/>
+        <relationship name="propertyForBeacon" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="STIProperty" inverseName="beaconsForProperty" inverseEntity="STIProperty" syncable="YES"/>
+    </entity>
+    <entity name="STIPatrol" syncable="YES">
+        <attribute name="endTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="startTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="beaconsCheckedForPatrol" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="STIBeacon" inverseName="patrolsForCheckedBeacon" inverseEntity="STIBeacon" syncable="YES"/>
+        <relationship name="propertyForPatrol" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="STIProperty" inverseName="patrolsForProperty" inverseEntity="STIProperty" syncable="YES"/>
+    </entity>
+    <entity name="STIProperty" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="beaconsForProperty" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="STIBeacon" inverseName="propertyForBeacon" inverseEntity="STIBeacon" syncable="YES"/>
+        <relationship name="patrolsForProperty" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="STIPatrol" inverseName="propertyForPatrol" inverseEntity="STIPatrol" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="STIProperty" positionX="-63" positionY="-27" width="128" height="108"/>
+        <element name="STIPatrol" positionX="-54" positionY="-9" width="128" height="126"/>
+        <element name="STIBeacon" positionX="-36" positionY="18" width="128" height="234"/>
+    </elements>
+</model>
