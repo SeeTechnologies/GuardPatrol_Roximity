@@ -8,6 +8,7 @@
 
 #import "STIAppDelegate.h"
 #import "ROXIMITYlib/ROXIMITYlib.h"
+#import "STIBeacon.h"
 
 @implementation STIAppDelegate
 
@@ -15,8 +16,12 @@
 {
     // Override point for customization after application launch.
     [ROXIMITYEngine startWithLaunchOptions:launchOptions andEngineOptions: nil];
+
+    STIBeacon *demoBeacon1 = [[STIBeacon alloc] initWithBeaconId:@"1-4385" nearMessage:@"Use key #42 to unlock" immediateMessage:@"Re-lock after entering" errorMessage:@"You need to complete your patrol before exiting"];
+    STIBeacon *demoBeacon2 = [[STIBeacon alloc] initWithBeaconId:@"1-4494" nearMessage:@"Behind books on middle shelf" immediateMessage:@"Confirm locked" errorMessage:@"Already completed - please continue your patrol"];
+    STIBeacon *demoBeacon3 = [[STIBeacon alloc] initWithBeaconId:@"1-4447" nearMessage:@"Mounted on outside wall" immediateMessage:@"Confirm not stolen" errorMessage:@"Already completed - please continue your patrol"];
     
-    [ROXIMITYEngine setAlias:@"mobility@startup.com"];
+    [[DataManager sharedInstance] save];
     
     return YES;
 }

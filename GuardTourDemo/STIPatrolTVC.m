@@ -76,8 +76,6 @@ NSString *_currentProximityText = @"";
         
         NSString *proximityValue = [beaconDictionary objectForKey:kROXNotifBeaconProximityValue];
         
-        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-        
         if ([beaconName isEqualToString:@"Front Door"] && [self isNewProximity:[proximityValue intValue]])
         {
             switch ([proximityValue intValue])
@@ -99,8 +97,6 @@ NSString *_currentProximityText = @"";
                     break;
             }
         }
-        
-
     }
 }
 

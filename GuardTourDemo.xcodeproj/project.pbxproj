@@ -31,7 +31,11 @@
 		49BA070B197781F1003EC4D3 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49BA070A197781F1003EC4D3 /* CFNetwork.framework */; };
 		49BA070D19778208003EC4D3 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49BA070C19778208003EC4D3 /* AdSupport.framework */; };
 		49BA070F19778215003EC4D3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49BA070E19778215003EC4D3 /* SystemConfiguration.framework */; };
-		49BDC7AE197AFB2D00F11E48 /* STIPatrolModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49BDC7AC197AFB2D00F11E48 /* STIPatrolModel.xcdatamodeld */; };
+		49BDC7AE197AFB2D00F11E48 /* GuardPatrol.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49BDC7AC197AFB2D00F11E48 /* GuardPatrol.xcdatamodeld */; };
+		49BDC7B1197B036000F11E48 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BDC7B0197B036000F11E48 /* DataManager.m */; };
+		49BDC7B4197B0D0900F11E48 /* STIProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BDC7B3197B0D0900F11E48 /* STIProperty.m */; };
+		49BDC7B7197B0D0900F11E48 /* STIPatrol.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BDC7B6197B0D0900F11E48 /* STIPatrol.m */; };
+		49BDC7BA197B0D0900F11E48 /* STIBeacon.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BDC7B9197B0D0900F11E48 /* STIBeacon.m */; };
 		49EFD16A197ACC3B001F9B70 /* STIPatrolTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EFD169197ACC3B001F9B70 /* STIPatrolTVC.m */; };
 		51154C03E5C1433F8B6724B3 /* libPods-GuardTourDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98E9BC9F7B7D4F5FBD9FB60A /* libPods-GuardTourDemo.a */; };
 /* End PBXBuildFile section */
@@ -79,7 +83,15 @@
 		49BA070A197781F1003EC4D3 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		49BA070C19778208003EC4D3 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		49BA070E19778215003EC4D3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		49BDC7AD197AFB2D00F11E48 /* STIPatrolModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = STIPatrolModel.xcdatamodel; sourceTree = "<group>"; };
+		49BDC7AD197AFB2D00F11E48 /* GuardPatrol.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GuardPatrol.xcdatamodel; sourceTree = "<group>"; };
+		49BDC7AF197B036000F11E48 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
+		49BDC7B0197B036000F11E48 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
+		49BDC7B2197B0D0900F11E48 /* STIProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STIProperty.h; sourceTree = "<group>"; };
+		49BDC7B3197B0D0900F11E48 /* STIProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STIProperty.m; sourceTree = "<group>"; };
+		49BDC7B5197B0D0900F11E48 /* STIPatrol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STIPatrol.h; sourceTree = "<group>"; };
+		49BDC7B6197B0D0900F11E48 /* STIPatrol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STIPatrol.m; sourceTree = "<group>"; };
+		49BDC7B8197B0D0900F11E48 /* STIBeacon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STIBeacon.h; sourceTree = "<group>"; };
+		49BDC7B9197B0D0900F11E48 /* STIBeacon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STIBeacon.m; sourceTree = "<group>"; };
 		49EFD168197ACC3B001F9B70 /* STIPatrolTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STIPatrolTVC.h; sourceTree = "<group>"; };
 		49EFD169197ACC3B001F9B70 /* STIPatrolTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STIPatrolTVC.m; sourceTree = "<group>"; };
 		915247DCEA5744D5930A57EB /* Pods-GuardTourDemo.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuardTourDemo.xcconfig"; path = "Pods/Pods-GuardTourDemo.xcconfig"; sourceTree = "<group>"; };
@@ -161,10 +173,18 @@
 		49BA06C919777FAE003EC4D3 /* GuardTourDemo */ = {
 			isa = PBXGroup;
 			children = (
+				49BDC7AF197B036000F11E48 /* DataManager.h */,
+				49BDC7B0197B036000F11E48 /* DataManager.m */,
+				49BDC7B8197B0D0900F11E48 /* STIBeacon.h */,
+				49BDC7B9197B0D0900F11E48 /* STIBeacon.m */,
+				49BDC7B5197B0D0900F11E48 /* STIPatrol.h */,
+				49BDC7B6197B0D0900F11E48 /* STIPatrol.m */,
+				49BDC7B2197B0D0900F11E48 /* STIProperty.h */,
+				49BDC7B3197B0D0900F11E48 /* STIProperty.m */,
 				49BA06D219777FAE003EC4D3 /* STIAppDelegate.h */,
 				49BA06D319777FAE003EC4D3 /* STIAppDelegate.m */,
 				49BA06D519777FAE003EC4D3 /* Main.storyboard */,
-				49BDC7AC197AFB2D00F11E48 /* STIPatrolModel.xcdatamodeld */,
+				49BDC7AC197AFB2D00F11E48 /* GuardPatrol.xcdatamodeld */,
 				49EFD168197ACC3B001F9B70 /* STIPatrolTVC.h */,
 				49EFD169197ACC3B001F9B70 /* STIPatrolTVC.m */,
 				49BA06D819777FAE003EC4D3 /* STIViewController.h */,
@@ -360,10 +380,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49BDC7B7197B0D0900F11E48 /* STIPatrol.m in Sources */,
+				49BDC7B4197B0D0900F11E48 /* STIProperty.m in Sources */,
 				49EFD16A197ACC3B001F9B70 /* STIPatrolTVC.m in Sources */,
+				49BDC7BA197B0D0900F11E48 /* STIBeacon.m in Sources */,
+				49BDC7B1197B036000F11E48 /* DataManager.m in Sources */,
 				49BA06D019777FAE003EC4D3 /* main.m in Sources */,
 				49BA06D419777FAE003EC4D3 /* STIAppDelegate.m in Sources */,
-				49BDC7AE197AFB2D00F11E48 /* STIPatrolModel.xcdatamodeld in Sources */,
+				49BDC7AE197AFB2D00F11E48 /* GuardPatrol.xcdatamodeld in Sources */,
 				49BA06DA19777FAE003EC4D3 /* STIViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -603,13 +627,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		49BDC7AC197AFB2D00F11E48 /* STIPatrolModel.xcdatamodeld */ = {
+		49BDC7AC197AFB2D00F11E48 /* GuardPatrol.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				49BDC7AD197AFB2D00F11E48 /* STIPatrolModel.xcdatamodel */,
+				49BDC7AD197AFB2D00F11E48 /* GuardPatrol.xcdatamodel */,
 			);
-			currentVersion = 49BDC7AD197AFB2D00F11E48 /* STIPatrolModel.xcdatamodel */;
-			path = STIPatrolModel.xcdatamodeld;
+			currentVersion = 49BDC7AD197AFB2D00F11E48 /* GuardPatrol.xcdatamodel */;
+			path = GuardPatrol.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
