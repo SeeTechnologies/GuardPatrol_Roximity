@@ -8,6 +8,8 @@
 
 #import "STIPatrolTVC.h"
 #import "ROXIMITYlib/ROXIMITYlib.h"
+#import "STIBeacon.h"
+#import "STIBeaconController.h"
 
 @interface STIPatrolTVC ()
 
@@ -108,6 +110,31 @@ NSString *_currentProximityText = @"";
 
 #pragma mark - Table view data source
 
+-(NSFetchedResultsController *)fetchedResultsController
+{
+    if (_fetchedResultsController != nil)
+    {
+        return _fetchedResultsController;
+    }
+    
+    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:[STIBeaconController allBeaconsSortedFetchRequest] managedObjectContext:[[DataManager sharedInstance] mainObjectContext] sectionNameKeyPath:nil cacheName:@"BeaconList"];
+    
+    self.fetchedResultsController.delegate = self;
+    
+    [NSFetchedResultsController deleteCacheWithName:@"BeaconList"];
+    
+#warning Set up error handling
+    NSError *error = nil;
+    [self.fetchedResultsController performFetch:&error];
+    
+    return _fetchedResultsController;
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    [self.tableView reloadData];
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -115,15 +142,19 @@ NSString *_currentProximityText = @"";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    return [sectionInfo numberOfObjects];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PatrolCell" forIndexPath:indexPath];
     
+    STIBeacon *beacon = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    cell.textLabel.text = beacon.beaconId;
+    cell.detailTextLabel.text = beacon.nearMessage;
     // Configure the cell...
-    cell.textLabel.text = _currentProximityText;
+//    cell.textLabel.text = _currentProximityText;
     
     return cell;
 }

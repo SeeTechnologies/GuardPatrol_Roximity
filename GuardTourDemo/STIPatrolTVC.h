@@ -10,4 +10,7 @@
 
 @interface STIPatrolTVC : UITableViewController
 
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) NSFetchRequest *fetchRequest;
+
 @end
