@@ -33,6 +33,7 @@ typedef NS_ENUM(NSInteger, STIEntrywayStatus)
 
 enum STIEntrywayStatus _entrywayStatus = STIEntrywayStatusNotVisited;
 int _beaconCheckTotalCount = 0;
+BOOL _allBeaconsFound = false;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -61,6 +62,20 @@ int _beaconCheckTotalCount = 0;
 {
     NSDictionary *rangedBeaconsDictionary = notification.userInfo;
     NSArray *propertyBeacons = [STIBeaconController returnAllBeacons];
+    
+    if (!_allBeaconsFound)
+    {
+        if ([rangedBeaconsDictionary count] != [propertyBeacons count])
+        {
+            [self.activityIndicator startAnimating];
+        }
+        else
+        {
+            _allBeaconsFound = true;
+            [self.activityIndicator stopAnimating];
+        }
+    }
+    
     
     for (STIBeacon *beacon in propertyBeacons)
     {
@@ -169,7 +184,16 @@ int _beaconCheckTotalCount = 0;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PatrolCell" forIndexPath:indexPath];
     
     STIBeacon *beacon = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = beacon.name;
+    
+    if (!_allBeaconsFound && (beacon.name == nil || [beacon.name isEqualToString:@""]))
+    {
+        cell.textLabel.text = @"Searching for beacon...";
+        cell.detailTextLabel.text = @"";
+    }
+    else
+    {
+        cell.textLabel.text = beacon.name;
+    }
 
     switch ([beacon.currentProximityValue intValue])
     {
@@ -182,8 +206,11 @@ int _beaconCheckTotalCount = 0;
         case PROXIMITY_IMMEDIATE:
             cell.detailTextLabel.text = beacon.immediateMessage;
             break;
-        default:
+        case PROXIMITY_UKNOWN:
             // unknown - do nothing
+            break;
+        default:
+            cell.detailTextLabel.text = @"";
             break;
     }
     

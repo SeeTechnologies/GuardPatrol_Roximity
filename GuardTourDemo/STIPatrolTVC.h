@@ -10,6 +10,8 @@
 
 @interface STIPatrolTVC : UITableViewController
 
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicator;
+
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) NSFetchRequest *fetchRequest;
 

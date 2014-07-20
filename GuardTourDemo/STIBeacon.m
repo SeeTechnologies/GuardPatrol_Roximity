@@ -40,6 +40,8 @@
     self.nearMessage = newNearMessage;
     self.immediateMessage = newImmediateMessage;
     self.errorMessage = newErrorMessage;
+    self.name = @"";
+    self.type = @"";
     
     return self;
 }
