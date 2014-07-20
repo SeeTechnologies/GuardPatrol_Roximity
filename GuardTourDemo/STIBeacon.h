@@ -15,6 +15,7 @@
 
 @property (nonatomic, retain) NSString * beaconId;
 @property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSString * type;
 @property (nonatomic, retain) NSNumber * checked;
 @property (nonatomic, retain) NSNumber * checkedCount;
 @property (nonatomic, retain) NSNumber * currentProximityValue;

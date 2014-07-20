@@ -10,6 +10,7 @@
         <attribute name="immediateMessage" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="nearMessage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="patrolsForCheckedBeacon" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="STIPatrol" inverseName="beaconsCheckedForPatrol" inverseEntity="STIPatrol" syncable="YES"/>
         <relationship name="propertyForBeacon" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="STIProperty" inverseName="beaconsForProperty" inverseEntity="STIProperty" syncable="YES"/>
     </entity>
@@ -25,7 +26,7 @@
         <relationship name="patrolsForProperty" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="STIPatrol" inverseName="propertyForPatrol" inverseEntity="STIPatrol" syncable="YES"/>
     </entity>
     <elements>
-        <element name="STIBeacon" positionX="-36" positionY="18" width="128" height="252"/>
+        <element name="STIBeacon" positionX="-36" positionY="18" width="128" height="270"/>
         <element name="STIPatrol" positionX="-54" positionY="-9" width="128" height="126"/>
         <element name="STIProperty" positionX="-63" positionY="-27" width="128" height="108"/>
     </elements>

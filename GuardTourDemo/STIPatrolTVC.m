@@ -17,14 +17,22 @@
 
 @implementation STIPatrolTVC
 
+#define BEACON_TYPE_ENTRYWAY @"entryway"
+
 #define PROXIMITY_UKNOWN 0
 #define PROXIMITY_IMMEDIATE 1
 #define PROXIMITY_NEAR 2
 #define PROXIMITY_FAR 3
 
-int _differentProximityCount = 0;
-int _currentProximityValue = 0;
-NSString *_currentProximityText = @"";
+typedef NS_ENUM(NSInteger, STIEntrywayStatus)
+{
+    STIEntrywayStatusNotVisited,
+    STIEntrywayStatusEntered,
+    STIEntrywayStatusExited
+};
+
+enum STIEntrywayStatus _entrywayStatus = STIEntrywayStatusNotVisited;
+int _beaconCheckTotalCount = 0;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -60,14 +68,51 @@ NSString *_currentProximityText = @"";
         
         if (beaconDictionary != nil)
         {
-            if ([beacon isNewProximity:[[beaconDictionary objectForKey:kROXNotifBeaconProximityValue] intValue]])
-            {
-                beacon.currentProximityValue = [beaconDictionary objectForKey:kROXNotifBeaconProximityValue];
-            }
-            
             if (![beacon.name isEqualToString:[beaconDictionary objectForKey:kROXNotifBeaconName]])
             {
                 beacon.name = [beaconDictionary objectForKey:kROXNotifBeaconName];
+            }
+            
+            NSArray *beaconTags = [beaconDictionary objectForKey:kROXNotifBeaconTags];
+            
+            if ([beaconTags count] > 0)
+            {
+                // demo simplification, can enter many tags via ROX portal
+                beacon.type = beaconTags[0];
+            }
+         
+            if ([beacon isNewProximity:[[beaconDictionary objectForKey:kROXNotifBeaconProximityValue] intValue]])
+            {
+                // TODO: refactor into new method?
+                beacon.currentProximityValue = [beaconDictionary objectForKey:kROXNotifBeaconProximityValue];
+
+                if ([beacon.currentProximityValue intValue] == PROXIMITY_IMMEDIATE)
+                {
+                    switch (_entrywayStatus)
+                    {
+                        case STIEntrywayStatusNotVisited:
+                            if ([beacon.type isEqualToString:BEACON_TYPE_ENTRYWAY])
+                            {
+                                _entrywayStatus = STIEntrywayStatusEntered;
+                                _beaconCheckTotalCount = 1;
+                                beacon.checked = [NSNumber numberWithBool:YES];
+                            }
+                            break;
+                        case STIEntrywayStatusEntered:
+                            if (![beacon.type isEqualToString:BEACON_TYPE_ENTRYWAY] && _beaconCheckTotalCount < [propertyBeacons count] && !beacon.checked)
+                            {
+                                beacon.checked = [NSNumber numberWithBool:YES];
+                                _beaconCheckTotalCount++;
+                            }
+                            else if ([beacon.type isEqualToString:BEACON_TYPE_ENTRYWAY] && _beaconCheckTotalCount == [propertyBeacons count])
+                            {
+                                _entrywayStatus = STIEntrywayStatusExited;
+                            }
+                        default:
+                            // do nothing
+                            break;
+                    }
+                }
             }
             
             NSLog(@"Beacon: %@ is at %@ proximity", beacon.name, beacon.currentProximityValue);
@@ -125,12 +170,7 @@ NSString *_currentProximityText = @"";
     
     STIBeacon *beacon = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = beacon.name;
-//    cell.detailTextLabel.text = [beacon.currentProximityValue stringValue];
-    // Configure the cell...
-//    cell.textLabel.text = _currentProximityText;
-    
-    //        if ([self isNewProximity:[proximityValue intValue]])
-    //        {
+
     switch ([beacon.currentProximityValue intValue])
     {
         case PROXIMITY_FAR:
@@ -141,21 +181,53 @@ NSString *_currentProximityText = @"";
             break;
         case PROXIMITY_IMMEDIATE:
             cell.detailTextLabel.text = beacon.immediateMessage;
-            
-            if (!beacon.checked)
-            {
-                beacon.checked = [NSNumber numberWithBool:YES];
-            }
             break;
         default:
-            //                    cell.textLabel.text = @"Frosty";
+            // unknown - do nothing
             break;
     }
-    //        }
-
-    if (beacon.checked)
+    
+    switch (_entrywayStatus)
     {
-        cell.backgroundColor = [UIColor greenColor];
+        case STIEntrywayStatusNotVisited:
+            if ([beacon.type isEqualToString:BEACON_TYPE_ENTRYWAY])
+            {
+                cell.backgroundColor = [UIColor whiteColor];
+            }
+            else
+            {
+                cell.backgroundColor = [UIColor lightGrayColor];
+            }
+            break;
+        case STIEntrywayStatusEntered:
+            if ([beacon.type isEqualToString:BEACON_TYPE_ENTRYWAY])
+            {
+                if (_beaconCheckTotalCount == 1)
+                {
+                    cell.backgroundColor = [UIColor greenColor];
+                }
+                else if (_beaconCheckTotalCount == [[STIBeaconController returnAllBeacons] count])
+                {
+                    cell.backgroundColor = [UIColor whiteColor];
+                }
+                else
+                {
+                    cell.backgroundColor = [UIColor lightGrayColor];
+                }
+            }
+            else if (beacon.checked)
+            {
+                cell.backgroundColor = [UIColor greenColor];
+            }
+            else
+            {
+                cell.backgroundColor = [UIColor whiteColor];
+            }
+            break;
+        case STIEntrywayStatusExited:
+            cell.backgroundColor = [UIColor greenColor];
+        default:
+            break;
     }
     
     return cell;

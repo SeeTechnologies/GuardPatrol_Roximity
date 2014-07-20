@@ -15,6 +15,7 @@
 
 @dynamic beaconId;
 @dynamic name;
+@dynamic type;
 @dynamic checked;
 @dynamic checkedCount;
 @dynamic currentProximityValue;
