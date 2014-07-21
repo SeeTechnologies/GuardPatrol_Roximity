@@ -37,6 +37,9 @@
 		49BDC7B7197B0D0900F11E48 /* STIPatrol.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BDC7B6197B0D0900F11E48 /* STIPatrol.m */; };
 		49BDC7BA197B0D0900F11E48 /* STIBeacon.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BDC7B9197B0D0900F11E48 /* STIBeacon.m */; };
 		49BDC7BD197B18B500F11E48 /* STIBeaconController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BDC7BC197B18B500F11E48 /* STIBeaconController.m */; };
+		49BDC7C0197CAA3C00F11E48 /* STIMainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BDC7BF197CAA3C00F11E48 /* STIMainVC.m */; };
+		49BDC7C3197CAA8000F11E48 /* STIArrivalVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BDC7C2197CAA8000F11E48 /* STIArrivalVC.m */; };
+		49BDC7C6197CAE7E00F11E48 /* Big-house.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49BDC7C5197CAE7E00F11E48 /* Big-house.jpg */; };
 		49EFD16A197ACC3B001F9B70 /* STIPatrolTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EFD169197ACC3B001F9B70 /* STIPatrolTVC.m */; };
 		51154C03E5C1433F8B6724B3 /* libPods-GuardTourDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98E9BC9F7B7D4F5FBD9FB60A /* libPods-GuardTourDemo.a */; };
 /* End PBXBuildFile section */
@@ -95,6 +98,11 @@
 		49BDC7B9197B0D0900F11E48 /* STIBeacon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STIBeacon.m; sourceTree = "<group>"; };
 		49BDC7BB197B18B500F11E48 /* STIBeaconController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STIBeaconController.h; sourceTree = "<group>"; };
 		49BDC7BC197B18B500F11E48 /* STIBeaconController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STIBeaconController.m; sourceTree = "<group>"; };
+		49BDC7BE197CAA3C00F11E48 /* STIMainVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STIMainVC.h; sourceTree = "<group>"; };
+		49BDC7BF197CAA3C00F11E48 /* STIMainVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STIMainVC.m; sourceTree = "<group>"; };
+		49BDC7C1197CAA8000F11E48 /* STIArrivalVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STIArrivalVC.h; sourceTree = "<group>"; };
+		49BDC7C2197CAA8000F11E48 /* STIArrivalVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STIArrivalVC.m; sourceTree = "<group>"; };
+		49BDC7C5197CAE7E00F11E48 /* Big-house.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Big-house.jpg"; sourceTree = "<group>"; };
 		49EFD168197ACC3B001F9B70 /* STIPatrolTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STIPatrolTVC.h; sourceTree = "<group>"; };
 		49EFD169197ACC3B001F9B70 /* STIPatrolTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STIPatrolTVC.m; sourceTree = "<group>"; };
 		915247DCEA5744D5930A57EB /* Pods-GuardTourDemo.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuardTourDemo.xcconfig"; path = "Pods/Pods-GuardTourDemo.xcconfig"; sourceTree = "<group>"; };
@@ -137,6 +145,7 @@
 		49BA06B719777FAE003EC4D3 = {
 			isa = PBXGroup;
 			children = (
+				49BDC7C4197CAE6F00F11E48 /* Resources */,
 				49BA06C919777FAE003EC4D3 /* GuardTourDemo */,
 				49BA06E819777FAE003EC4D3 /* GuardTourDemoTests */,
 				49BA06C219777FAE003EC4D3 /* Frameworks */,
@@ -196,6 +205,10 @@
 				49BA06CA19777FAE003EC4D3 /* Supporting Files */,
 				49BDC7BB197B18B500F11E48 /* STIBeaconController.h */,
 				49BDC7BC197B18B500F11E48 /* STIBeaconController.m */,
+				49BDC7BE197CAA3C00F11E48 /* STIMainVC.h */,
+				49BDC7BF197CAA3C00F11E48 /* STIMainVC.m */,
+				49BDC7C1197CAA8000F11E48 /* STIArrivalVC.h */,
+				49BDC7C2197CAA8000F11E48 /* STIArrivalVC.m */,
 			);
 			path = GuardTourDemo;
 			sourceTree = "<group>";
@@ -241,6 +254,14 @@
 				49BA06FD1977816D003EC4D3 /* ROXNotifications.h */,
 			);
 			path = ROXIMITYlib;
+			sourceTree = "<group>";
+		};
+		49BDC7C4197CAE6F00F11E48 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				49BDC7C5197CAE7E00F11E48 /* Big-house.jpg */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -332,6 +353,7 @@
 				49BA06DC19777FAE003EC4D3 /* Images.xcassets in Resources */,
 				49BA07001977816D003EC4D3 /* roximity.caf in Resources */,
 				49BA07011977816D003EC4D3 /* ROXIMITYlib.bundle in Resources */,
+				49BDC7C6197CAE7E00F11E48 /* Big-house.jpg in Resources */,
 				49BA06CE19777FAE003EC4D3 /* InfoPlist.strings in Resources */,
 				49BA06D719777FAE003EC4D3 /* Main.storyboard in Resources */,
 			);
@@ -388,9 +410,11 @@
 				49BDC7B7197B0D0900F11E48 /* STIPatrol.m in Sources */,
 				49BDC7B4197B0D0900F11E48 /* STIProperty.m in Sources */,
 				49EFD16A197ACC3B001F9B70 /* STIPatrolTVC.m in Sources */,
+				49BDC7C0197CAA3C00F11E48 /* STIMainVC.m in Sources */,
 				49BDC7BA197B0D0900F11E48 /* STIBeacon.m in Sources */,
 				49BDC7B1197B036000F11E48 /* DataManager.m in Sources */,
 				49BA06D019777FAE003EC4D3 /* main.m in Sources */,
+				49BDC7C3197CAA8000F11E48 /* STIArrivalVC.m in Sources */,
 				49BDC7BD197B18B500F11E48 /* STIBeaconController.m in Sources */,
 				49BA06D419777FAE003EC4D3 /* STIAppDelegate.m in Sources */,
 				49BDC7AE197AFB2D00F11E48 /* GuardPatrol.xcdatamodeld in Sources */,
