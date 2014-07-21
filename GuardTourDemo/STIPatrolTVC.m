@@ -58,6 +58,7 @@ BOOL _allBeaconsFound = false;
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedStatusNotification:) name:ROX_NOTIF_BEACON_RANGE_UPDATE object:nil];
     self.title = @"Wilman Manor";
+    [self.navigationItem setHidesBackButton:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated
