@@ -40,6 +40,7 @@
 		49BDC7C0197CAA3C00F11E48 /* STIMainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BDC7BF197CAA3C00F11E48 /* STIMainVC.m */; };
 		49BDC7C3197CAA8000F11E48 /* STIArrivalVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BDC7C2197CAA8000F11E48 /* STIArrivalVC.m */; };
 		49BDC7C6197CAE7E00F11E48 /* Big-house.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49BDC7C5197CAE7E00F11E48 /* Big-house.jpg */; };
+		49BDC7C9197D4F1300F11E48 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49BDC7C8197D4F1300F11E48 /* AudioToolbox.framework */; };
 		49EFD16A197ACC3B001F9B70 /* STIPatrolTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EFD169197ACC3B001F9B70 /* STIPatrolTVC.m */; };
 		51154C03E5C1433F8B6724B3 /* libPods-GuardTourDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98E9BC9F7B7D4F5FBD9FB60A /* libPods-GuardTourDemo.a */; };
 /* End PBXBuildFile section */
@@ -103,6 +104,7 @@
 		49BDC7C1197CAA8000F11E48 /* STIArrivalVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STIArrivalVC.h; sourceTree = "<group>"; };
 		49BDC7C2197CAA8000F11E48 /* STIArrivalVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STIArrivalVC.m; sourceTree = "<group>"; };
 		49BDC7C5197CAE7E00F11E48 /* Big-house.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Big-house.jpg"; sourceTree = "<group>"; };
+		49BDC7C8197D4F1300F11E48 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		49EFD168197ACC3B001F9B70 /* STIPatrolTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STIPatrolTVC.h; sourceTree = "<group>"; };
 		49EFD169197ACC3B001F9B70 /* STIPatrolTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STIPatrolTVC.m; sourceTree = "<group>"; };
 		915247DCEA5744D5930A57EB /* Pods-GuardTourDemo.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuardTourDemo.xcconfig"; path = "Pods/Pods-GuardTourDemo.xcconfig"; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49BDC7C9197D4F1300F11E48 /* AudioToolbox.framework in Frameworks */,
 				49BA070F19778215003EC4D3 /* SystemConfiguration.framework in Frameworks */,
 				49BA070D19778208003EC4D3 /* AdSupport.framework in Frameworks */,
 				49BA06C419777FAE003EC4D3 /* Foundation.framework in Frameworks */,
@@ -166,6 +169,7 @@
 		49BA06C219777FAE003EC4D3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				49BDC7C8197D4F1300F11E48 /* AudioToolbox.framework */,
 				49BA070E19778215003EC4D3 /* SystemConfiguration.framework */,
 				49BA070C19778208003EC4D3 /* AdSupport.framework */,
 				49BA070A197781F1003EC4D3 /* CFNetwork.framework */,

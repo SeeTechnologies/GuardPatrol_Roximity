@@ -11,6 +11,7 @@
 #import "STIBeacon.h"
 #import "STIBeaconController.h"
 #import "STIAppDelegate.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface STIPatrolTVC ()
 
@@ -38,6 +39,7 @@ typedef NS_ENUM(NSInteger, STIEntrywayStatus)
 enum STIEntrywayStatus _entrywayStatus = STIEntrywayStatusNotVisited;
 int _beaconCheckTotalCount = 0;
 BOOL _allBeaconsFound = false;
+SystemSoundID _soundID = 0;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -60,6 +62,11 @@ BOOL _allBeaconsFound = false;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedStatusNotification:) name:ROX_NOTIF_BEACON_RANGE_UPDATE object:nil];
     self.title = @"Wilman Manor";
     [self.navigationItem setHidesBackButton:YES];
+    
+    NSString *soundPath = [[NSBundle mainBundle]
+                            pathForResource:@"roximity" ofType:@"caf"];
+    NSURL *soundURL = [NSURL fileURLWithPath:soundPath];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &_soundID);
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -133,6 +140,8 @@ BOOL _allBeaconsFound = false;
                                 _entrywayStatus = STIEntrywayStatusEntered;
                                 _beaconCheckTotalCount = 1;
                                 beacon.checked = [NSNumber numberWithBool:YES];
+                                AudioServicesPlaySystemSound(_soundID);
+                                
                                 if (firstAppLaunch)
                                 {
                                     helpAlert.message = @"Continue your patrol by visiting the other checkpoints in any order.";
@@ -144,6 +153,7 @@ BOOL _allBeaconsFound = false;
                             {
                                 beacon.checked = [NSNumber numberWithBool:YES];
                                 _beaconCheckTotalCount++;
+                                AudioServicesPlaySystemSound(_soundID);
                                 
                                 if (firstAppLaunch && _beaconCheckTotalCount == [propertyBeacons count])
                                 {
@@ -153,6 +163,8 @@ BOOL _allBeaconsFound = false;
                             else if ([beacon.type isEqualToString:BEACON_TYPE_ENTRYWAY] && _beaconCheckTotalCount == [propertyBeacons count])
                             {
                                 _entrywayStatus = STIEntrywayStatusExited;
+                                AudioServicesPlaySystemSound(_soundID);
+                                
                                 if (firstAppLaunch)
                                 {
                                     helpAlert.message = @"Patrol completed. Please proceed to your next assignment.";
