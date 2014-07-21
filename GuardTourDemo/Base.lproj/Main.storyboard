@@ -20,7 +20,7 @@
             </objects>
             <point key="canvasLocation" x="-694" y="-664"/>
         </scene>
-        <!--MainVC-->
+        <!--MainVC - Guard Patrol-->
         <scene sceneID="ofn-7d-n30">
             <objects>
                 <viewController id="eWu-BR-kfL" customClass="STIMainVC" sceneMemberID="viewController">
@@ -32,26 +32,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Guard Patrol" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kmx-Dm-Uc9">
-                                <rect key="frame" x="55" y="132" width="211" height="46"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Searching for nearby properties..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="211" translatesAutoresizingMaskIntoConstraints="NO" id="9kv-WH-cr7">
-                                <rect key="frame" x="55" y="186" width="211" height="140"/>
+                                <rect key="frame" x="55" y="99" width="211" height="73"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="HxS-E4-fc9">
-                                <rect key="frame" x="150" y="334" width="20" height="20"/>
+                                <rect key="frame" x="274" y="126" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="badge.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="2J8-MP-bEh">
+                                <rect key="frame" x="40" y="180" width="240" height="260"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="KYj-in-Bc0"/>
+                    <navigationItem key="navigationItem" title="Guard Patrol" id="KYj-in-Bc0"/>
                     <connections>
                         <segue destination="NnX-Qt-Xg2" kind="push" identifier="Arriving" id="61t-tw-KRL"/>
                     </connections>
@@ -60,7 +58,7 @@
             </objects>
             <point key="canvasLocation" x="-108" y="-671"/>
         </scene>
-        <!--ArrivalVC-->
+        <!--ArrivalVC - Guard Patrol-->
         <scene sceneID="Z9O-gk-9fe">
             <objects>
                 <viewController id="NnX-Qt-Xg2" customClass="STIArrivalVC" sceneMemberID="viewController">
@@ -88,10 +86,14 @@
                                 <rect key="frame" x="20" y="180" width="280" height="207"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="hlG-gc-p3Z">
+                                <rect key="frame" x="246" y="121" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="haB-wU-KTR"/>
+                    <navigationItem key="navigationItem" title="Guard Patrol" id="haB-wU-KTR"/>
                     <connections>
                         <segue destination="6Sl-PH-5Xh" kind="push" identifier="Patrol" id="weL-xD-B30"/>
                     </connections>
@@ -193,6 +195,7 @@
     </scenes>
     <resources>
         <image name="Big-house.jpg" width="727" height="482"/>
+        <image name="badge.jpg" width="300" height="300"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

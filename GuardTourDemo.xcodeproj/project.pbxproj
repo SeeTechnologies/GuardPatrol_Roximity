@@ -41,6 +41,7 @@
 		49BDC7C3197CAA8000F11E48 /* STIArrivalVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BDC7C2197CAA8000F11E48 /* STIArrivalVC.m */; };
 		49BDC7C6197CAE7E00F11E48 /* Big-house.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49BDC7C5197CAE7E00F11E48 /* Big-house.jpg */; };
 		49BDC7C9197D4F1300F11E48 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49BDC7C8197D4F1300F11E48 /* AudioToolbox.framework */; };
+		49BDC7CB197D52BE00F11E48 /* badge.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49BDC7CA197D52BE00F11E48 /* badge.jpg */; };
 		49EFD16A197ACC3B001F9B70 /* STIPatrolTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EFD169197ACC3B001F9B70 /* STIPatrolTVC.m */; };
 		51154C03E5C1433F8B6724B3 /* libPods-GuardTourDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98E9BC9F7B7D4F5FBD9FB60A /* libPods-GuardTourDemo.a */; };
 /* End PBXBuildFile section */
@@ -105,6 +106,7 @@
 		49BDC7C2197CAA8000F11E48 /* STIArrivalVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STIArrivalVC.m; sourceTree = "<group>"; };
 		49BDC7C5197CAE7E00F11E48 /* Big-house.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Big-house.jpg"; sourceTree = "<group>"; };
 		49BDC7C8197D4F1300F11E48 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		49BDC7CA197D52BE00F11E48 /* badge.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = badge.jpg; sourceTree = "<group>"; };
 		49EFD168197ACC3B001F9B70 /* STIPatrolTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STIPatrolTVC.h; sourceTree = "<group>"; };
 		49EFD169197ACC3B001F9B70 /* STIPatrolTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STIPatrolTVC.m; sourceTree = "<group>"; };
 		915247DCEA5744D5930A57EB /* Pods-GuardTourDemo.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuardTourDemo.xcconfig"; path = "Pods/Pods-GuardTourDemo.xcconfig"; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 		49BDC7C4197CAE6F00F11E48 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				49BDC7CA197D52BE00F11E48 /* badge.jpg */,
 				49BDC7C5197CAE7E00F11E48 /* Big-house.jpg */,
 			);
 			name = Resources;
@@ -354,6 +357,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49BDC7CB197D52BE00F11E48 /* badge.jpg in Resources */,
 				49BA06DC19777FAE003EC4D3 /* Images.xcassets in Resources */,
 				49BA07001977816D003EC4D3 /* roximity.caf in Resources */,
 				49BA07011977816D003EC4D3 /* ROXIMITYlib.bundle in Resources */,
