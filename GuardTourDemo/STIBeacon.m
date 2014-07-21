@@ -20,7 +20,7 @@
 @dynamic checkedCount;
 @dynamic currentProximityValue;
 @dynamic differentProximityCount;
-@dynamic errorMessage;
+@dynamic farMessage;
 @dynamic immediateMessage;
 @dynamic nearMessage;
 @dynamic patrolsForCheckedBeacon;
@@ -28,18 +28,18 @@
 
 - (id)init
 {
-    return [self initWithBeaconId:@"" nearMessage:@"" immediateMessage:@"" errorMessage:@""];
+    return [self initWithBeaconId:@"" nearMessage:@"" immediateMessage:@"" farMessage:@""];
 }
 
 // designated initializer
-- (instancetype)initWithBeaconId: (NSString *) newBeaconId nearMessage: (NSString *) newNearMessage immediateMessage: (NSString *) newImmediateMessage errorMessage: (NSString *) newErrorMessage
+- (instancetype)initWithBeaconId: (NSString *) newBeaconId nearMessage: (NSString *) newNearMessage immediateMessage: (NSString *) newImmediateMessage farMessage: (NSString *) newFarMessage
 {
     self = [NSEntityDescription insertNewObjectForEntityForName:@"STIBeacon" inManagedObjectContext:[[DataManager sharedInstance] mainObjectContext]];
     
     self.beaconId = newBeaconId;
     self.nearMessage = newNearMessage;
     self.immediateMessage = newImmediateMessage;
-    self.errorMessage = newErrorMessage;
+    self.farMessage = newFarMessage;
     self.name = @"";
     self.type = @"";
     
@@ -52,7 +52,7 @@
     {
         return NO;
     }
-    else if ([self.currentProximityValue intValue] == 0 || ([self.currentProximityValue intValue] != incomingProximityValue && [self.differentProximityCount intValue] > 2))
+    else if ([self.currentProximityValue intValue] == 0 || ([self.currentProximityValue intValue] != incomingProximityValue && [self.differentProximityCount intValue] > 1))
     {
         self.currentProximityValue = [NSNumber numberWithInt: incomingProximityValue];
         self.differentProximityCount = [NSNumber numberWithInt:0];

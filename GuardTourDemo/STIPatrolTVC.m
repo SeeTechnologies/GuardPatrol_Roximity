@@ -19,10 +19,13 @@
 
 #define BEACON_TYPE_ENTRYWAY @"entryway"
 
-#define PROXIMITY_UKNOWN 0
-#define PROXIMITY_IMMEDIATE 1
-#define PROXIMITY_NEAR 2
-#define PROXIMITY_FAR 3
+typedef NS_ENUM(NSInteger, STIProximity)
+{
+    STIProximityUnknown,
+    STIProximityImmediate,
+    STIProximityNear,
+    STIProximityFar
+};
 
 typedef NS_ENUM(NSInteger, STIEntrywayStatus)
 {
@@ -110,7 +113,7 @@ BOOL _allBeaconsFound = false;
 
                 UIAlertView *helpAlert = [[UIAlertView alloc] initWithTitle:nil message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK",nil];
                 
-                if ([beacon.currentProximityValue intValue] == PROXIMITY_IMMEDIATE)
+                if ([beacon.currentProximityValue intValue] == STIProximityImmediate)
                 {
                     switch (_entrywayStatus)
                     {
@@ -228,16 +231,16 @@ BOOL _allBeaconsFound = false;
     {
         switch ([beacon.currentProximityValue intValue])
         {
-            case PROXIMITY_FAR:
-                cell.detailTextLabel.text = @"Out of range";
+            case STIProximityFar:
+                cell.detailTextLabel.text = beacon.farMessage;
                 break;
-            case PROXIMITY_NEAR:
+            case STIProximityNear:
                 cell.detailTextLabel.text = beacon.nearMessage;
                 break;
-            case PROXIMITY_IMMEDIATE:
+            case STIProximityImmediate:
                 cell.detailTextLabel.text = beacon.immediateMessage;
                 break;
-            case PROXIMITY_UKNOWN:
+            case STIProximityUnknown:
                 // unknown - do nothing
                 break;
             default:

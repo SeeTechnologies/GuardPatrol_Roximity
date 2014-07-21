@@ -20,7 +20,7 @@
 @property (nonatomic, retain) NSNumber * checkedCount;
 @property (nonatomic, retain) NSNumber * currentProximityValue;
 @property (nonatomic, retain) NSNumber * differentProximityCount;
-@property (nonatomic, retain) NSString * errorMessage;
+@property (nonatomic, retain) NSString * farMessage;
 @property (nonatomic, retain) NSString * immediateMessage;
 @property (nonatomic, retain) NSString * nearMessage;
 @property (nonatomic, retain) NSSet *patrolsForCheckedBeacon;
@@ -34,7 +34,7 @@
 - (void)addPatrolsForCheckedBeacon:(NSSet *)values;
 - (void)removePatrolsForCheckedBeacon:(NSSet *)values;
 
-- (instancetype)initWithBeaconId: (NSString *) newBeaconId nearMessage: (NSString *) newNearMessage immediateMessage: (NSString *) newImmediateMessage errorMessage: (NSString *) newErrorMessage;
+- (instancetype)initWithBeaconId: (NSString *) newBeaconId nearMessage: (NSString *) newNearMessage immediateMessage: (NSString *) newImmediateMessage farMessage: (NSString *) newFarMessage;
 - (BOOL)isNewProximity:(int) incomingProximityValue;
 
 @end
