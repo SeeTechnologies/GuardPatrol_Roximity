@@ -10,6 +10,7 @@
 #import "ROXIMITYlib/ROXIMITYlib.h"
 #import "STIBeacon.h"
 #import "STIBeaconController.h"
+#import "STIAppDelegate.h"
 
 @interface STIPatrolTVC ()
 
@@ -65,8 +66,13 @@ BOOL _allBeaconsFound = false;
 {
     [super viewDidAppear:animated];
     
-    UIAlertView *helpAlert = [[UIAlertView alloc] initWithTitle:nil message:@"Please start your patrol by entering by the front door." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK",nil];
-    [helpAlert show];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if ([defaults boolForKey:UD_FIRST_LAUNCH])
+    {
+        UIAlertView *helpAlert = [[UIAlertView alloc] initWithTitle:nil message:@"Please start your patrol by entering by the front door." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK",nil];
+        [helpAlert show];
+    }
 }
 
 //This function is the application’s response to the observation of the “ROX_NOTIF_BEACON_RANGE_UPDATE” string from the Notification Center. Here it is passed a notification containing the userInfo dictionary.
@@ -116,6 +122,9 @@ BOOL _allBeaconsFound = false;
                 
                 if ([beacon.currentProximityValue intValue] == STIProximityImmediate)
                 {
+                    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                    BOOL firstAppLaunch = [defaults boolForKey:UD_FIRST_LAUNCH];
+                    
                     switch (_entrywayStatus)
                     {
                         case STIEntrywayStatusNotVisited:
@@ -124,7 +133,10 @@ BOOL _allBeaconsFound = false;
                                 _entrywayStatus = STIEntrywayStatusEntered;
                                 _beaconCheckTotalCount = 1;
                                 beacon.checked = [NSNumber numberWithBool:YES];
-                                helpAlert.message = @"Continue your patrol by visiting the other checkpoints in any order.";
+                                if (firstAppLaunch)
+                                {
+                                    helpAlert.message = @"Continue your patrol by visiting the other checkpoints in any order.";
+                                }
                             }
                             break;
                         case STIEntrywayStatusEntered:
@@ -133,7 +145,7 @@ BOOL _allBeaconsFound = false;
                                 beacon.checked = [NSNumber numberWithBool:YES];
                                 _beaconCheckTotalCount++;
                                 
-                                if (_beaconCheckTotalCount == [propertyBeacons count])
+                                if (firstAppLaunch && _beaconCheckTotalCount == [propertyBeacons count])
                                 {
                                     helpAlert.message = @"Complete your patrol by leaving through the front door.";
                                 }
@@ -141,9 +153,12 @@ BOOL _allBeaconsFound = false;
                             else if ([beacon.type isEqualToString:BEACON_TYPE_ENTRYWAY] && _beaconCheckTotalCount == [propertyBeacons count])
                             {
                                 _entrywayStatus = STIEntrywayStatusExited;
-                                helpAlert.message = @"Patrol completed. Please proceed to your next assignment.";
+                                if (firstAppLaunch)
+                                {
+                                    helpAlert.message = @"Patrol completed. Please proceed to your next assignment.";
+                                }
                             }
-                            else if ([beacon.type isEqualToString:BEACON_TYPE_ENTRYWAY] && _beaconCheckTotalCount > 1 && _beaconCheckTotalCount < [propertyBeacons count])
+                            else if (firstAppLaunch && [beacon.type isEqualToString:BEACON_TYPE_ENTRYWAY] && _beaconCheckTotalCount > 1 && _beaconCheckTotalCount < [propertyBeacons count])
                             {
                                 helpAlert.message = @"You need to visit all the other checkpoints before leaving the property.";
                             }
@@ -159,7 +174,7 @@ BOOL _allBeaconsFound = false;
                 }
             }
             
-            NSLog(@"Beacon: %@ is at %@ proximity", beacon.name, beacon.currentProximityValue);
+//            NSLog(@"Beacon: %@ is at %@ proximity", beacon.name, beacon.currentProximityValue);
         }
     }
 }

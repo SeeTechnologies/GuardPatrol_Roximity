@@ -10,6 +10,8 @@
 
 @interface STIAppDelegate : UIResponder <UIApplicationDelegate>
 
+#define UD_FIRST_LAUNCH @"FirstLaunch"
+
 @property (strong, nonatomic) UIWindow *window;
 
 @end

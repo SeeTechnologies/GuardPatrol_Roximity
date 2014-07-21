@@ -18,6 +18,7 @@
     // Override point for customization after application launch.
     [ROXIMITYEngine startWithLaunchOptions:launchOptions andEngineOptions: nil];
 
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSArray *beacons = [STIBeaconController returnAllBeacons];
     
     if ([beacons count] == 0)
@@ -31,6 +32,12 @@
         STIBeacon *demoBeacon3 = [[STIBeacon alloc] initWithBeaconId:@"5363ca8869702d4afb300000" nearMessage:@"Mounted on outside wall" immediateMessage:@"Confirmed not stolen" farMessage:@"Next to front entryway"];
 
         [[DataManager sharedInstance] save];
+        
+        [defaults setBool:YES forKey:UD_FIRST_LAUNCH];
+    }
+    else
+    {
+        [defaults setBool:NO forKey:UD_FIRST_LAUNCH];
     }
     
     return YES;
