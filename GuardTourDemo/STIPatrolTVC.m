@@ -57,6 +57,14 @@ BOOL _allBeaconsFound = false;
     self.title = @"Wilman Manor";
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    UIAlertView *helpAlert = [[UIAlertView alloc] initWithTitle:nil message:@"Please start your patrol by entering by the front door." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK",nil];
+    [helpAlert show];
+}
+
 //This function is the application’s response to the observation of the “ROX_NOTIF_BEACON_RANGE_UPDATE” string from the Notification Center. Here it is passed a notification containing the userInfo dictionary.
 -(void) receivedStatusNotification:(NSNotification *) notification
 {
@@ -75,7 +83,6 @@ BOOL _allBeaconsFound = false;
             [self.activityIndicator stopAnimating];
         }
     }
-    
     
     for (STIBeacon *beacon in propertyBeacons)
     {
@@ -101,6 +108,8 @@ BOOL _allBeaconsFound = false;
                 // TODO: refactor into new method?
                 beacon.currentProximityValue = [beaconDictionary objectForKey:kROXNotifBeaconProximityValue];
 
+                UIAlertView *helpAlert = [[UIAlertView alloc] initWithTitle:nil message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK",nil];
+                
                 if ([beacon.currentProximityValue intValue] == PROXIMITY_IMMEDIATE)
                 {
                     switch (_entrywayStatus)
@@ -111,6 +120,7 @@ BOOL _allBeaconsFound = false;
                                 _entrywayStatus = STIEntrywayStatusEntered;
                                 _beaconCheckTotalCount = 1;
                                 beacon.checked = [NSNumber numberWithBool:YES];
+                                helpAlert.message = @"Continue your patrol by visiting the other checkpoints in any order.";
                             }
                             break;
                         case STIEntrywayStatusEntered:
@@ -118,15 +128,30 @@ BOOL _allBeaconsFound = false;
                             {
                                 beacon.checked = [NSNumber numberWithBool:YES];
                                 _beaconCheckTotalCount++;
+                                
+                                if (_beaconCheckTotalCount == [propertyBeacons count])
+                                {
+                                    helpAlert.message = @"Complete your patrol by leaving through the front door.";
+                                }
                             }
                             else if ([beacon.type isEqualToString:BEACON_TYPE_ENTRYWAY] && _beaconCheckTotalCount == [propertyBeacons count])
                             {
                                 _entrywayStatus = STIEntrywayStatusExited;
+                                helpAlert.message = @"Patrol completed. Please proceed to your next assignment.";
+                            }
+                            else if ([beacon.type isEqualToString:BEACON_TYPE_ENTRYWAY] && _beaconCheckTotalCount > 1 && _beaconCheckTotalCount < [propertyBeacons count])
+                            {
+                                helpAlert.message = @"You need to visit all the other checkpoints before leaving the property.";
                             }
                         default:
                             // do nothing
                             break;
                     }
+                }
+                
+                if (helpAlert.message != nil)
+                {
+                    [helpAlert show];
                 }
             }
             
@@ -187,7 +212,7 @@ BOOL _allBeaconsFound = false;
     
     if (!_allBeaconsFound && (beacon.name == nil || [beacon.name isEqualToString:@""]))
     {
-        cell.textLabel.text = @"Searching for beacon...";
+        cell.textLabel.text = @"Searching for checkpoint...";
         cell.detailTextLabel.text = @"";
     }
     else
@@ -195,23 +220,30 @@ BOOL _allBeaconsFound = false;
         cell.textLabel.text = beacon.name;
     }
 
-    switch ([beacon.currentProximityValue intValue])
+    if (beacon.checked)
     {
-        case PROXIMITY_FAR:
-            cell.detailTextLabel.text = @"Out of range";
-            break;
-        case PROXIMITY_NEAR:
-            cell.detailTextLabel.text = beacon.nearMessage;
-            break;
-        case PROXIMITY_IMMEDIATE:
-            cell.detailTextLabel.text = beacon.immediateMessage;
-            break;
-        case PROXIMITY_UKNOWN:
-            // unknown - do nothing
-            break;
-        default:
-            cell.detailTextLabel.text = @"";
-            break;
+        cell.detailTextLabel.text = beacon.immediateMessage;
+    }
+    else
+    {
+        switch ([beacon.currentProximityValue intValue])
+        {
+            case PROXIMITY_FAR:
+                cell.detailTextLabel.text = @"Out of range";
+                break;
+            case PROXIMITY_NEAR:
+                cell.detailTextLabel.text = beacon.nearMessage;
+                break;
+            case PROXIMITY_IMMEDIATE:
+                cell.detailTextLabel.text = beacon.immediateMessage;
+                break;
+            case PROXIMITY_UKNOWN:
+                // unknown - do nothing
+                break;
+            default:
+                cell.detailTextLabel.text = @"";
+                break;
+        }
     }
     
     switch (_entrywayStatus)
@@ -219,7 +251,7 @@ BOOL _allBeaconsFound = false;
         case STIEntrywayStatusNotVisited:
             if ([beacon.type isEqualToString:BEACON_TYPE_ENTRYWAY])
             {
-                cell.backgroundColor = [UIColor whiteColor];
+                cell.backgroundColor = [UIColor orangeColor];
             }
             else
             {
@@ -235,7 +267,7 @@ BOOL _allBeaconsFound = false;
                 }
                 else if (_beaconCheckTotalCount == [[STIBeaconController returnAllBeacons] count])
                 {
-                    cell.backgroundColor = [UIColor whiteColor];
+                    cell.backgroundColor = [UIColor orangeColor];
                 }
                 else
                 {
@@ -248,7 +280,7 @@ BOOL _allBeaconsFound = false;
             }
             else
             {
-                cell.backgroundColor = [UIColor whiteColor];
+                cell.backgroundColor = [UIColor orangeColor];
             }
             break;
         case STIEntrywayStatusExited:

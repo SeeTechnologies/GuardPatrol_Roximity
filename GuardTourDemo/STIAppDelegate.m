@@ -24,11 +24,11 @@
     {
         // demo app simplification - would normally load this data from a web service so it can be updated remotely
         // id in portal = 1-4385
-        STIBeacon *demoBeacon1 = [[STIBeacon alloc] initWithBeaconId:@"5363ca8869702d4afb2e0000" nearMessage:@"Use key #42 to unlock" immediateMessage:@"Re-lock after entering" errorMessage:@"You need to complete your patrol before exiting"];
+        STIBeacon *demoBeacon1 = [[STIBeacon alloc] initWithBeaconId:@"5363ca8869702d4afb2e0000" nearMessage:@"Use key #42 to unlock" immediateMessage:@"Relock after exiting" errorMessage:@"You need to complete your patrol before exiting"];
         // id in portal = 1-4494
-        STIBeacon *demoBeacon2 = [[STIBeacon alloc] initWithBeaconId:@"5363ca8869702d4afb2f0000" nearMessage:@"Behind books on middle shelf" immediateMessage:@"Confirm locked" errorMessage:@"Already completed - please continue your patrol"];
+        STIBeacon *demoBeacon2 = [[STIBeacon alloc] initWithBeaconId:@"5363ca8869702d4afb2f0000" nearMessage:@"Behind books on middle shelf" immediateMessage:@"Confirmed locked" errorMessage:@"Already completed - please continue your patrol"];
         // id in portal = 1-4447
-        STIBeacon *demoBeacon3 = [[STIBeacon alloc] initWithBeaconId:@"5363ca8869702d4afb300000" nearMessage:@"Mounted on outside wall" immediateMessage:@"Confirm not stolen" errorMessage:@"Already completed - please continue your patrol"];
+        STIBeacon *demoBeacon3 = [[STIBeacon alloc] initWithBeaconId:@"5363ca8869702d4afb300000" nearMessage:@"Mounted on outside wall" immediateMessage:@"Confirmed not stolen" errorMessage:@"Already completed - please continue your patrol"];
 
         [[DataManager sharedInstance] save];
     }
